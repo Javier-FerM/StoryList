@@ -1,0 +1,17 @@
+{
+    "require": {
+        "soanix/cavesman": "^0.5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Api\\": "src/Api"
+        }
+    },
+    "require-dev": {
+        "doctrine/orm": "3.3.1",
+        "symfony/cache": "^6.3.8|^7.0"
+    },
+    "config": {
+        "bin-dir": "bin"
+    }
+}

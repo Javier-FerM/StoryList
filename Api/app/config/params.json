@@ -1,0 +1,9 @@
+{
+    "debug": true,
+    "log": {
+        "debug": true
+    },
+    "db": {
+        "global_aux": false
+    }
+}

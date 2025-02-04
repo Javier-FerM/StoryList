@@ -1,0 +1,28 @@
+{
+    "name": "soanix/cavesman",
+    "description": "PHP Framework",
+    "bin": [
+        "bin/cavesman",
+        "bin/doctrine"
+    ],
+    "authors": [
+        {
+            "name": "Soanix",
+            "email": "soanix91@gmail.com"
+        }
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=8.4",
+        "soanix/router": "^1.7",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "files": [
+            "src/Command/CommandList.php"
+        ],
+        "psr-4": {
+            "Cavesman\\": "src/Core/"
+        }
+    }
+}

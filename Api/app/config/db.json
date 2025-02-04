@@ -1,0 +1,15 @@
+{
+    "local": {
+        "driver": "pdo_mysql",
+        "user": "storyList",
+        "password": "Esp@nja08042000",
+        "dbname": "storyList"
+    },
+    "cli": {
+        "dev_mode": true,
+        "driver": "pdo_mysql",
+        "user": "storyList",
+        "password": "Esp@nja08042000",
+        "dbname": "storyList"
+    }
+}

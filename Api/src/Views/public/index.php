@@ -1,0 +1,3 @@
+<?php
+
+Cavesman\Router::run();
