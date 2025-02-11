@@ -4,18 +4,21 @@ namespace Api;
 
 use Cavesman\Db;
 
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\MappedSuperclass]
 class ApiBase
 {
     //Funciones para buscar en la bbdd
 
-    public function findByOne(array $params): ?object
+    public static function findByOne(array $params): ?object
     {
         $db = Db::getManager();
 
-        return $db->getRepository(self::class)->findOneBy($params);
+        return $db->getRepository(static::class)->findOneBy($params);
     }
 
-    public function formRequest(): self
+    public static function formRequest(): self
     {
         $data = json_decode(file_get_contents('php://input'), true);
 

@@ -3,7 +3,8 @@
         "driver": "pdo_mysql",
         "user": "storyList",
         "password": "Esp@nja08042000",
-        "dbname": "storyList"
+        "dbname": "storyList",
+        "dev_mode": true
     },
     "cli": {
         "dev_mode": true,

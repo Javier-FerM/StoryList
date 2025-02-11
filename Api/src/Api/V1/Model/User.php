@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\V1\Models;
+namespace Api\V1\Model;
 
 
 use Api\V1\Api;
@@ -21,7 +21,7 @@ class User extends Api
      * @return \Api\V1\Entity\User
      * @throws \Exception
      */
-    public function Entity( object $data, bool $update = false,): \Api\V1\Entity\User
+    public function Entity( object $data, bool $update = false): \Api\V1\Entity\User
     {
         if ($data->id) {
             $entity = \Api\V1\Entity\User::findByOne(['id' => $data->id, 'deletedOn' => null]);

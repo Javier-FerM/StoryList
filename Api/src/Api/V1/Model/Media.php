@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\V1\Models;
+namespace Api\V1\Model;
 
 use Api\V1\Api;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +10,6 @@ class Media extends Api
     public string $title = '';
     public string $description = '';
     public float $rating = 0.0;
-    //public Collection $generes;
 
     /**
      * @param object $data
@@ -35,7 +34,6 @@ class Media extends Api
         $entity->title = $data->title;
         $entity->description = $data->description;
         $entity->rating = $data->rating;
-        //$entity-> genere = $this->generes;
 
         return $entity;
     }

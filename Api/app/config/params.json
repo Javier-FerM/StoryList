@@ -5,5 +5,9 @@
     },
     "db": {
         "global_aux": false
-    }
+    },
+    "session": {
+        "enabled": true
+    },
+    "timezone": "Europe\/Madrid"
 }

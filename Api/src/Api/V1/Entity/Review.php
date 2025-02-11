@@ -12,4 +12,8 @@ class Review extends Api
 {
     #[ORM\Column(name: "comment", type: "string", length: 255)]
     public string $comment;
+
+    #[ORM\OneToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
+    private User $user;
 }

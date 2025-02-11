@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\V1\Models;
+namespace Api\V1\Model;
 
 use Api\V1\Api;
 use Api\V1\Entity\Season;

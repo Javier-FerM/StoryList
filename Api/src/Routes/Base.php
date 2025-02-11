@@ -23,14 +23,31 @@ Router::mount('/api/v1', function () {
 
 
     Router::mount('/media', function () {
+        /**@see Media::list()*/
         Router::get("/", [Media::class, 'list']);
+        /**@see Media::get()*/
         Router::get("/{id}", [Media::class, 'get']);
+        /**@see Media::update()*/
         Router::put("/{id}", [Media::class, 'update']);
+        /**@see Media::create()*/
         Router::post("/", [Media::class, 'create']);
+        /**@see Media::delete()*/
         Router::delete("/{id}", [Media::class, 'delete']);
+
+        /**@see Media::listMove()*/
+        Router::get("/{mediaId}/move", [Media::class,'listMove']);
+        /**@see Media::getMove()*/
+        Router::get("/{mediaId}/move/{id}", [Media::class, 'getMove']);
+        /**@see Media::updateMove()*/
+        Router::put("/move/{id}", [Media::class, 'updateMove']);
+        /**@see Media::createMove()*/
+        Router::post("/move", [Media::class, 'createMove']);
+        /**@see Media::deleteMove()*/
+        Router::delete("/move/{id}", [Media::class, 'deleteMove']);
+
     });
 
-    Router::mount('/serie', function () {
+    /*Router::mount('/serie', function () {
         Router::get("/", [Serie::class, 'list']);
         Router::get("/{id}", [Serie::class, 'get']);
         Router::put("/{id}", [Serie::class, 'update']);
@@ -60,6 +77,7 @@ Router::mount('/api/v1', function () {
         Router::put("/{id}", [Review::class, 'update']);
         Router::post("/", [Review::class, 'create']);
         Router::delete("/{id}", [Review::class, 'delete']);
-    });
+    }); */
+
 });
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Api\V1\Models;
+namespace Api\V1\Model;
 
 use Api\V1\Api;
 
@@ -8,13 +8,19 @@ class Move extends Api
 {
     public bool $sequel;
 
-    public function Entity(bool $update = false): \Api\V1\Entity\Move
+    /**
+     * @param object $data
+     * @param bool $update
+     * @return \Api\V1\Entity\Move
+     * @throws \Exception
+     */
+    public function Entity( object $data, bool $update = false): \Api\V1\Entity\Move
     {
-        if ($this->id) {
-            $entity = \Api\V1\Entity\Move::findByOne(['id' => $this->id, 'deletedOn' => null]);
+        if ($data->id) {
+            $entity = \Api\V1\Entity\Move::findByOne(['id' => $data->id, 'deletedOn' => null]);
 
             if (!$entity)
-                throw new \Exception('La pelicula no existe');
+                throw new \Exception("La pelicula no existe");
 
             if (!$update)
                 return $entity;
@@ -22,8 +28,9 @@ class Move extends Api
             $entity = new \Api\V1\Entity\Move();
         }
 
-        $entity->sequel = $this->sequel;
+        $entity->sequel = $data->sequel;
 
         return $entity;
+
     }
 }
