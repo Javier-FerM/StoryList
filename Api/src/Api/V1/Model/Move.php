@@ -7,6 +7,7 @@ use Api\V1\Api;
 class Move extends Api
 {
     public bool $sequel;
+    public int $duration;
 
     /**
      * @param object $data
@@ -29,6 +30,7 @@ class Move extends Api
         }
 
         $entity->sequel = $data->sequel;
+        $entity->duration = $data->duration;
 
         return $entity;
 

@@ -9,12 +9,31 @@ use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Exception\ORMException;
 use Doctrine\ORM\Query\QueryException;
 
-class  Move implements ControllerInterface
+class Move implements ControllerInterface
 {
 
     public static function list(): JsonResponse
     {
+        try {
+            $db = Db::getManager();
 
+            $query = $db->createQuery(
+                "SELECT m 
+                FROM \Api\V1\Entity\Move m 
+                WHERE m.deletedOn is null");
+
+            $list = $query->getResult();
+
+            if (!$list) {
+                $moves = new \Api\V1\Entity\Move();
+                return new JsonResponse(['message' => 'No se han encontrado peliculas', 'Moves' => $moves], 404);
+            }
+            $moves = array_map(fn($move = new \Api\V1\Model\Move()) => $move, $list);
+            return new JsonResponse(['message' => 'Listado de peliculas', 'peliculas' => $moves], 200);
+
+        } catch (\Exception $e) {
+            return new JsonResponse(['message' => $e->getMessage()]);
+        }
     }
 
     public static function get($id): JsonResponse
