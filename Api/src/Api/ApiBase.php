@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\MappedSuperclass]
 class ApiBase
 {
-    //Funciones para buscar en la bbdd
 
     public static function findByOne(array $params): ?object
     {
@@ -30,6 +29,11 @@ class ApiBase
         }
 
         return $entity;
+    }
+
+    public function model()
+    {
+        return get_object_vars($this);
     }
 
 }

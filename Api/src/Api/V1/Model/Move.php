@@ -15,10 +15,10 @@ class Move extends Api
      * @return \Api\V1\Entity\Move
      * @throws \Exception
      */
-    public function Entity( object $data, bool $update = false): \Api\V1\Entity\Move
+    public function Entity( bool $update = false): \Api\V1\Entity\Move
     {
-        if ($data->id) {
-            $entity = \Api\V1\Entity\Move::findByOne(['id' => $data->id, 'deletedOn' => null]);
+        if ($this->id) {
+            $entity = \Api\V1\Entity\Move::findByOne(['id' => $this->id, 'deletedOn' => null]);
 
             if (!$entity)
                 throw new \Exception("La pelicula no existe");
@@ -29,8 +29,8 @@ class Move extends Api
             $entity = new \Api\V1\Entity\Move();
         }
 
-        $entity->sequel = $data->sequel;
-        $entity->duration = $data->duration;
+        $entity->sequel = $this->sequel;
+        $entity->duration = $this->duration;
 
         return $entity;
 

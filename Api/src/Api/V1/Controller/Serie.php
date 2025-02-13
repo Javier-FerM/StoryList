@@ -28,7 +28,7 @@ class Serie implements ControllerInterface
                 return new JsonResponse(['message' => 'No se han encontrado series', 'series' => $series], 404);
             }
 
-            $series = array_map(fn($serie = new \Api\V1\Model\Serie()) => $serie, $list);
+            $series = array_map(fn(\Api\V1\Entity\Serie $serie) => $serie, $list);
             return new JsonResponse(['message' => 'Listado de series', 'series' => $series], 200);
 
         } catch (\Exception $e) {

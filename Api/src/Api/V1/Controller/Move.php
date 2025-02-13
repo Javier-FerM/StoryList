@@ -28,7 +28,7 @@ class Move implements ControllerInterface
                 $moves = new \Api\V1\Entity\Move();
                 return new JsonResponse(['message' => 'No se han encontrado peliculas', 'Moves' => $moves], 404);
             }
-            $moves = array_map(fn($move = new \Api\V1\Model\Move()) => $move, $list);
+            $moves = array_map(fn(\Api\V1\Entity\Move $move) => $move, $list);
             return new JsonResponse(['message' => 'Listado de peliculas', 'peliculas' => $moves], 200);
 
         } catch (\Exception $e) {
@@ -66,22 +66,28 @@ class Move implements ControllerInterface
         return new JsonResponse(['message' => 'Pelicula creada', 'pelicula' => $entity], 201);
     }
 
-    public static function update($id): JsonResponse
+    public static function update(int $id): JsonResponse
     {
         try {
             $db = Db::getManager();
 
-            $requestData = \Api\V1\Entity\Move::formRequest();
+            $entity = \Api\V1\Entity\Move::formRequest();
 
-            $model = new \Api\V1\Model\Move();
+            /** @var \Api\V1\Entity\Move $entity */
+
+            if($entity->id !== $id)
+                return new JsonResponse(['message' => 'id incorrecto'], 404);
+
+            $model = $entity->model();
 
             try {
-                $entity = $model->Entity($requestData, true);
+
+                $model = $model->Entity(true);
 
                 $db->persist($entity);
                 $db->flush();
 
-                return new JsonResponse(['message' => 'Usuario actualizado correctamente.', 'user' => $entity], 200);
+                return new JsonResponse(['message' => 'Usuario actualizado correctamente.', 'user' => $entity->model()], 200);
             } catch (\Exception|ORMException $e) {
 
                 return new JsonResponse(['error' => $e->getMessage()], 404);
@@ -91,7 +97,7 @@ class Move implements ControllerInterface
         }
     }
 
-    public static function delete($id): JsonResponse
+    public static function delete(int $id): JsonResponse
     {
         try {
             $db = Db::getManager();
