@@ -24,16 +24,37 @@ class ApiBase
         $entity = new static();
 
         foreach ($data as $key => $value) {
-            if(property_exists($entity, $key))
+            if (property_exists($entity, $key))
                 $entity->$key = $value;
         }
 
         return $entity;
     }
 
+    /**
+     * @throws \Exception
+     */
     public function model()
     {
-        return get_object_vars($this);
+        $entity = get_class($this);
+
+        $model = str_replace('\Entity\\', '\Model\\', $entity);
+        $model = '\\' . ltrim($model, '\\');
+
+        if (class_exists($model)) {
+            $model = new $model();
+
+            $entityProperties = get_object_vars($this);
+
+            foreach ($entityProperties as $property => $value) {
+                if (property_exists($model, $property)) {
+                    $model->$property = $value;
+                }
+            }
+            return $model;
+        } else {
+            throw new \Exception("La clase del modelo {$model} no existe.");
+        }
     }
 
 }

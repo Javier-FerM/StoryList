@@ -52,19 +52,24 @@ class User implements ControllerInterface
         return new JsonResponse(['message' => 'Usuario encontrado', 'user' => $user], 200);
     }
 
+    /**
+     * @throws \Exception
+     */
     public static function create(): JsonResponse
     {
         try {
             $db = Db::getManager();
 
-            $entity = \Api\V1\Entity\User::formRequest();
+            $entityRquest = \Api\V1\Entity\User::formRequest();
+            $model = $entityRquest->model();
+            $entity = $model->Entity();
 
             $db->persist($entity);
             $db->flush();
-        } catch (QueryException|ORMException $e) {
+        } catch (\Exception|ORMException $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
-        return new JsonResponse(['message' => 'Usuario creado', 'usuario' => $entity], 201);
+        return new JsonResponse(['message' => 'Usuario creado', 'usuario' => $entity->model()], 201);
     }
 
     public static function update(int $id): JsonResponse
@@ -73,17 +78,16 @@ class User implements ControllerInterface
         try {
             $db = Db::getManager();
 
-            $requestData = \Api\V1\Entity\User::formRequest();
-
-            $model = new \Api\V1\Model\User();
+            $entity = \Api\V1\Entity\User::formRequest();
 
             try {
-                $entity = $model->Entity($requestData, true);
+                $model = $entity->model();
+                $entity = $model->Entity(true);
 
                 $db->persist($entity);
                 $db->flush();
 
-                return new JsonResponse(['message' => 'Usuario actualizado correctamente.', 'user' => $entity], 200);
+                return new JsonResponse(['message' => 'Usuario actualizado correctamente.', 'user' => $model], 200);
             } catch (\Exception|ORMException $e) {
 
                 return new JsonResponse(['error' => $e->getMessage()], 404);

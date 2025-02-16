@@ -3,6 +3,7 @@
 namespace Api\V1\Controller;
 
 use Api\Interface\ControllerInterface;
+use Api\V1\Api;
 use Cavesman\Db;
 use Cavesman\Http\JsonResponse;
 use Doctrine\DBAL\Exception;
@@ -24,11 +25,10 @@ class Move implements ControllerInterface
 
             $list = $query->getResult();
 
-            if (!$list) {
-                $moves = new \Api\V1\Entity\Move();
-                return new JsonResponse(['message' => 'No se han encontrado peliculas', 'Moves' => $moves], 404);
-            }
-            $moves = array_map(fn(\Api\V1\Entity\Move $move) => $move, $list);
+            if (!$list)
+                return new JsonResponse(['message' => 'No se han encontrado peliculas'], 404);
+
+            $moves = array_map(fn(\Api\V1\Entity\Move $move) => $move->model(), $list);
             return new JsonResponse(['message' => 'Listado de peliculas', 'peliculas' => $moves], 200);
 
         } catch (\Exception $e) {
@@ -70,24 +70,20 @@ class Move implements ControllerInterface
     {
         try {
             $db = Db::getManager();
-
             $entity = \Api\V1\Entity\Move::formRequest();
 
             /** @var \Api\V1\Entity\Move $entity */
-
             if($entity->id !== $id)
                 return new JsonResponse(['message' => 'id incorrecto'], 404);
 
-            $model = $entity->model();
 
             try {
-
-                $model = $model->Entity(true);
+                $model = $entity->model();
+                $entity = $model->Entity(true);
 
                 $db->persist($entity);
                 $db->flush();
-
-                return new JsonResponse(['message' => 'Usuario actualizado correctamente.', 'user' => $entity->model()], 200);
+                return new JsonResponse(['message' => 'Pelicula actualizada correctamente.', 'pelicula' => $model], 200);
             } catch (\Exception|ORMException $e) {
 
                 return new JsonResponse(['error' => $e->getMessage()], 404);

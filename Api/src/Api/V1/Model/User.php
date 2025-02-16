@@ -21,10 +21,10 @@ class User extends Api
      * @return \Api\V1\Entity\User
      * @throws \Exception
      */
-    public function Entity( object $data, bool $update = false): \Api\V1\Entity\User
+    public function Entity(bool $update = false): \Api\V1\Entity\User
     {
-        if ($data->id) {
-            $entity = \Api\V1\Entity\User::findByOne(['id' => $data->id, 'deletedOn' => null]);
+        if ($this->id) {
+            $entity = \Api\V1\Entity\User::findByOne(['id' => $this->id, 'deletedOn' => null]);
 
             if (!$entity)
                 throw new \Exception("El usuario no existe");
@@ -35,9 +35,9 @@ class User extends Api
             $entity = new \Api\V1\Entity\User();
         }
 
-        $entity->username = $data->username;
-        $entity->email = $data->email;
-        $entity->password = $data->password;
+        $entity->username = $this->username;
+        $entity->email = $this->email;
+        $entity->password = $this->password;
 
         return $entity;
 
