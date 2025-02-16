@@ -6,9 +6,6 @@ use Api\V1\Api;
 
 class Move extends Media
 {
-    public bool $sequel;
-    public int $duration;
-    public Media $media;
 
     /**
      * @param object $data

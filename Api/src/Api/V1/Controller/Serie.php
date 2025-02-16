@@ -11,6 +11,9 @@ use Doctrine\ORM\Query\QueryException;
 class Serie implements ControllerInterface
 {
 
+    /**
+     * @return JsonResponse
+     */
     public static function list(): JsonResponse
     {
         try {
@@ -23,12 +26,10 @@ class Serie implements ControllerInterface
 
             $list = $query->getResult();
 
-            if (!$list) {
-                $series = new \Api\V1\Entity\Serie();
-                return new JsonResponse(['message' => 'No se han encontrado series', 'series' => $series], 404);
-            }
+            if (!$list)
+                return new JsonResponse('No se han encontrado series', 404);
 
-            $series = array_map(fn(\Api\V1\Entity\Serie $serie) => $serie, $list);
+            $series = array_map(fn(\Api\V1\Entity\Serie $serie) => $serie->model(), $list);
             return new JsonResponse(['message' => 'Listado de series', 'series' => $series], 200);
 
         } catch (\Exception $e) {
@@ -37,33 +38,82 @@ class Serie implements ControllerInterface
 
     }
 
-    public static function get($id): JsonResponse
+    /**
+     * @throws \Exception
+     */
+    public static function get(int $id): JsonResponse
     {
-        return new JsonResponse(['message' =>'Serie encontrada', 'serie' => []]);
+        $entity = \Api\V1\Entity\Serie::findByOne(['id' => $id, 'deletedOn' => null]);
+        if (!$entity)
+            return new JsonResponse('Serie no encontrado', 404);
+
+        return new JsonResponse(['message' => 'Serie encontrada', 'serie' => $entity->model()], 200);
     }
 
+    /**
+     * @return JsonResponse
+     */
     public static function create(): JsonResponse
     {
         try {
-        $db = Db::getManager();
+            $db = Db::getManager();
 
-        $entity = \Api\V1\Entity\Serie::formRequest();
+            $entity = \Api\V1\Entity\Serie::formRequest();
 
-        $db->persist($entity);
-        $db->flush();
-    } catch (QueryException|ORMException $e) {
-        return new JsonResponse(['error' => $e->getMessage()]);
-    }
+            $model = $entity->model();
+            $entity = $model->Entity();
+
+            $db->persist($entity);
+            $db->flush();
+        } catch (\Exception|ORMException $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
         return new JsonResponse(['message' => 'Serie creada', 'Serie' => $entity], 201);
     }
 
-    public static function update($id): JsonResponse
+    /**
+     * @throws \Exception
+     */
+    public static function update(int $id): JsonResponse
     {
-        return new JsonResponse(['message' =>'Serie actualizada', 'serie' => []]);
+        $entity = \Api\V1\Entity\Serie::formRequest();
+
+        $model = $entity->model();
+
+        if ($model->id !== $id)
+            return new JsonResponse('Error id', 404);
+
+        try {
+            $db = Db::getManager();
+            $entity = $model->Entity(true);
+
+            $db->persist($entity);
+            $db->flush();
+        } catch (\Exception|ORMException $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+        return new JsonResponse(['message' => 'Serie actualizada', 'serie' => $model], 200);
     }
 
-    public static function delete($id): JsonResponse
+    public static function delete(int $id): JsonResponse
     {
-        return new JsonResponse(['message' =>'Serie eliminada']);
+        $entity = \Api\V1\Entity\Serie::findByOne(['id' => $id, 'deletedOn' => null]);
+
+        if (!$entity)
+            return new JsonResponse('Serie no encontrado', 404);
+
+        try {
+            $db = Db::getManager();
+
+            /**@var \Api\V1\Entity\Serie $entity */
+            $entity->deletedOn = new \DateTime();
+
+            $db->persist($entity);
+            $db->flush();
+        } catch (\Exception|ORMException $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
+        }
+
+        return new JsonResponse(['message' => 'Serie eliminada']);
     }
 }

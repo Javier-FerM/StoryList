@@ -13,6 +13,9 @@ use Doctrine\ORM\Query\QueryException;
 class Move implements ControllerInterface
 {
 
+    /**
+     * @return JsonResponse
+     */
     public static function list(): JsonResponse
     {
         try {
@@ -36,7 +39,12 @@ class Move implements ControllerInterface
         }
     }
 
-    public static function get($id): JsonResponse
+    /**
+     * @param $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
+    public static function get(int $id): JsonResponse
     {
         try {
             $move = \Api\V1\Entity\Move::findByOne(['id' => $id, 'deletedOn' => null]);
@@ -44,13 +52,16 @@ class Move implements ControllerInterface
             if (!$move)
                 return new JsonResponse(['message' => 'La pelicula no existe'], 404);
 
-        } catch (Exception|ORMException $e) {
+        } catch (\Exception $e) {
             return new JsonResponse(['error' => $e->getMessage()], 500);
         }
 
-        return new JsonResponse(['message' => 'Pelicula encontrado', 'pelicula' => $move], 200);
+        return new JsonResponse(['message' => 'Pelicula encontrado', 'pelicula' => $move->model()], 200);
     }
 
+    /**
+     * @return JsonResponse
+     */
     public static function create(): JsonResponse
     {
         try {
@@ -58,51 +69,60 @@ class Move implements ControllerInterface
 
             $entity = \Api\V1\Entity\Move::formRequest();
 
+            $model = $entity->model();
+            $entity = $model->Entity();
+
             $db->persist($entity);
             $db->flush();
-        } catch (QueryException|ORMException $e) {
+        } catch (\Exception|ORMException $e) {
             return new JsonResponse(['error' => $e->getMessage()]);
         }
         return new JsonResponse(['message' => 'Pelicula creada', 'pelicula' => $entity], 201);
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     * @throws \Exception
+     */
     public static function update(int $id): JsonResponse
     {
+        $entity = \Api\V1\Entity\Move::formRequest();
+
+        $model = $entity->model();
+
+        if ($model->id !== $id)
+            return new JsonResponse('Error id', 404);
+
         try {
             $db = Db::getManager();
-            $entity = \Api\V1\Entity\Move::formRequest();
+            $entity = $model->Entity(true);
 
-            /** @var \Api\V1\Entity\Move $entity */
-            if($entity->id !== $id)
-                return new JsonResponse(['message' => 'id incorrecto'], 404);
-
-
-            try {
-                $model = $entity->model();
-                $entity = $model->Entity(true);
-
-                $db->persist($entity);
-                $db->flush();
-                return new JsonResponse(['message' => 'Pelicula actualizada correctamente.', 'pelicula' => $model], 200);
-            } catch (\Exception|ORMException $e) {
-
-                return new JsonResponse(['error' => $e->getMessage()], 404);
-            }
-        } catch (QueryException|ORMException $e) {
-            return new JsonResponse(['error' => $e->getMessage()], 500);
+            $db->persist($entity);
+            $db->flush();
+        } catch (\Exception|ORMException $e) {
+            return new JsonResponse(['error' => $e->getMessage()]);
         }
+        return new JsonResponse(['message' => 'Pelicula actualizada', 'pelicula' => $model], 200);
     }
 
+    /**
+     * @param int $id
+     * @return JsonResponse
+     */
     public static function delete(int $id): JsonResponse
     {
+        $entity = \Api\V1\Entity\Move::findByOne(['id' => $id, 'deletedOn' => null]);
+
+        if (!$entity)
+            return new JsonResponse(['message' => 'La pelicula no existe'], 404);
+
         try {
             $db = Db::getManager();
-            $entity = \Api\V1\Entity\Move::findByOne(['id' => $id, 'deletedOn' => null]);
-            if (!$entity)
-                return new JsonResponse(['message' => 'La pelicula no existe'], 404);
 
-            /**@var \Api\V1\Entity\Move $entity */
+            /**@var \Api\V1\Entity\Serie $entity */
             $entity->deletedOn = new \DateTime();
+
             $db->persist($entity);
             $db->flush();
 
