@@ -4,7 +4,31 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5e6eb9af-75b8-4f2f-8142-a87f51ac960b" name="Changes" comment="" />
+    <list default="true" id="5e6eb9af-75b8-4f2f-8142-a87f51ac960b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/ApiBase.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/ApiBase.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Controller/Move.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Controller/Move.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Controller/Serie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Controller/Serie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Controller/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Controller/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Base.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Episode.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Episode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Genere.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Genere.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Media.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Media.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Season.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Season.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/Serie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/Serie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Entity/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Entity/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Base.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Episode.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Episode.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Genere.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Genere.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Media.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Media.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Move.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Move.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Review.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Review.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Season.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Season.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/Serie.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/Serie.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Api/V1/Model/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Api/V1/Model/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Routes/Base.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Routes/Base.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +37,9 @@
   <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="C:\php\8.4\php-8.4.2-Win32-vs17-x64\php.exe">
     <include_path>
@@ -55,7 +82,9 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/TheZo/Desktop/img/Proyectos/Api/src/Api&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/TheZo/Desktop/img/Proyectos/StoryList/Api&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,8 +107,8 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-deb605915726-JavaScript-PS-243.22562.233" />
-        <option value="bundled-php-predefined-a98d8de5180a-7980c7aaca61-com.jetbrains.php.sharedIndexes-PS-243.22562.233" />
+        <option value="bundled-js-predefined-d6986cc7102b-822845ee3bb5-JavaScript-PS-243.23654.168" />
+        <option value="bundled-php-predefined-a98d8de5180a-4c3855d0ab16-com.jetbrains.php.sharedIndexes-PS-243.23654.168" />
       </set>
     </attachedChunks>
   </component>
@@ -102,6 +131,23 @@
       <workItem from="1738628071503" duration="61000" />
       <workItem from="1738660259098" duration="6456000" />
       <workItem from="1738666829298" duration="5000" />
+      <workItem from="1740238950972" duration="864000" />
+      <workItem from="1740240950285" duration="1564000" />
+      <workItem from="1740244756368" duration="1095000" />
+      <workItem from="1740247624152" duration="800000" />
+      <workItem from="1740303152755" duration="20000" />
+      <workItem from="1740304890932" duration="4157000" />
+      <workItem from="1740392888572" duration="5535000" />
+      <workItem from="1740431163538" duration="82000" />
+      <workItem from="1740564267580" duration="62000" />
+      <workItem from="1740569673092" duration="429000" />
+      <workItem from="1740575141466" duration="551000" />
+      <workItem from="1740576509706" duration="140000" />
+      <workItem from="1740599410679" duration="2542000" />
+      <workItem from="1740604730987" duration="5039000" />
+      <workItem from="1740651276260" duration="994000" />
+      <workItem from="1740653475124" duration="7000" />
+      <workItem from="1740655844345" duration="2297000" />
     </task>
     <servers />
   </component>

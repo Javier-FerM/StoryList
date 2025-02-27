@@ -2,11 +2,7 @@
 
 namespace Api\V1\Model;
 
-
-use Api\V1\Api;
-use Cavesman\Db;
-
-class User extends Api
+class User extends Base
 {
     public string $username = '';
 

@@ -19,12 +19,12 @@ abstract class Media extends ApiBase
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
     public ?int $id = 0;
-    #[ORM\Column(name: "deletedOn", type: "datetime", nullable: true)]
+    #[ORM\Column(name: "deletedOn", type: "date", nullable: true)]
     public ?\DateTime $deletedOn = null;
     #[ORM\Column(name: "title", type: "string", length: 255, unique: true)]
     public string $title;
-    #[ORM\Column(name: "description", type: "string", length: 255)]
-    public string $description;
+    #[ORM\Column(name: "description", type: "text", length: 65535)]
+    public $description;
     #[ORM\Column(name: "raiting", type: "float")]
     public float $rating;
 
@@ -35,4 +35,5 @@ abstract class Media extends ApiBase
     {
         $this->generes = new ArrayCollection();
     }
+    
 }

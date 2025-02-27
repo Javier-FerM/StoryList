@@ -2,13 +2,11 @@
 
 namespace Api\V1\Entity;
 
-use Api\V1\Api;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity]
 #[ORM\Table(name: "user")]
-class User extends Api
+class User extends Base
 {
     #[ORM\Column(name: "username", type: "string", length: 255)]
     public string $username;

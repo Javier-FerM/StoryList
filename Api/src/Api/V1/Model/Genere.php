@@ -2,12 +2,10 @@
 
 namespace Api\V1\Model;
 
-use Api\V1\Api;
 
-class Genere extends Api
+class Genere extends Base
 {
-    public string $name = '';
-    public Media $media;
+    public string $genere = '';
 
     /**
      * @param bool $update
@@ -29,8 +27,7 @@ class Genere extends Api
             $entity = new \Api\V1\Entity\Genere();
         }
 
-        $entity->name = $this->name;
-        $this->media = $entity;
+        $entity->name = $this->genere;
 
         return $entity;
 

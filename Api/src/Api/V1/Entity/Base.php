@@ -1,19 +1,19 @@
 <?php
 
-namespace Api\V1;
+namespace Api\V1\Entity;
 
 use Api\ApiBase;
 use Doctrine\ORM\Mapping as ORM;
 
 
-class Api extends ApiBase
+abstract class Base extends ApiBase
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
     public ?int $id = 0;
 
-    #[ORM\Column(name: "deletedOn", type: "datetime", nullable: true)]
+    #[ORM\Column(name: "deletedOn", type: "date", nullable: true)]
     public ?\DateTime $deletedOn = null;
 
 }

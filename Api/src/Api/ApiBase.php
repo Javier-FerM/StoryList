@@ -3,10 +3,9 @@
 namespace Api;
 
 use Cavesman\Db;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
-use Doctrine\ORM\Mapping as ORM;
-
-#[ORM\MappedSuperclass]
 class ApiBase
 {
 
@@ -34,27 +33,30 @@ class ApiBase
     /**
      * @throws \Exception
      */
+
     public function model()
     {
         $entity = get_class($this);
-
         $model = str_replace('\Entity\\', '\Model\\', $entity);
         $model = '\\' . ltrim($model, '\\');
 
         if (class_exists($model)) {
             $model = new $model();
+            $Properties = get_object_vars($this);
 
-            $entityProperties = get_object_vars($this);
-
-            foreach ($entityProperties as $property => $value) {
+            foreach ($Properties as $property => $value) {
                 if (property_exists($model, $property)) {
-                    $model->$property = $value;
+                    if($value instanceof Collection){
+                        $model->$property = array_map(fn($item) => method_exists($item, 'model') ? $item->model() : $item, $value->toArray());
+                    }else{
+                        $model->$property = $value;
+                    }
                 }
             }
             return $model;
-        } else {
-            throw new \Exception("La clase del modelo {$model} no existe.");
         }
+        throw new \Exception("La clase del modelo {$model} no existe.");
     }
+
 
 }

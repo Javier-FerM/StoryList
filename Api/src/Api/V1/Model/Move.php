@@ -2,8 +2,6 @@
 
 namespace Api\V1\Model;
 
-use Api\V1\Api;
-
 class Move extends Media
 {
 

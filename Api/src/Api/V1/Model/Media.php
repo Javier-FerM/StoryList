@@ -2,19 +2,11 @@
 
 namespace Api\V1\Model;
 
-use Api\V1\Api;
-use Doctrine\Common\Collections\Collection;
-
-class Media extends Api
+abstract class Media extends Base
 {
     public string $title = '';
     public string $description = '';
     public float $rating = 0.0;
+    public array $generes = [];
 
-    /**
-     * @param object $data
-     * @param bool $update
-     * @return \Api\V1\Entity\Media
-     * @throws \Exception
-     */
 }

@@ -2,9 +2,8 @@
 
 namespace Api\V1\Model;
 
-use Api\V1\Api;
 
-class Review extends Api
+class Review extends Base
 {
  public string $comment = '';
 }

@@ -3,12 +3,9 @@
 namespace Api\V1\Controller;
 
 use Api\Interface\ControllerInterface;
-use Api\V1\Api;
 use Cavesman\Db;
 use Cavesman\Http\JsonResponse;
-use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Exception\ORMException;
-use Doctrine\ORM\Query\QueryException;
 
 class Move implements ControllerInterface
 {
@@ -68,9 +65,6 @@ class Move implements ControllerInterface
             $db = Db::getManager();
 
             $entity = \Api\V1\Entity\Move::formRequest();
-
-            $model = $entity->model();
-            $entity = $model->Entity();
 
             $db->persist($entity);
             $db->flush();

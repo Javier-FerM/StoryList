@@ -31,7 +31,7 @@ class User implements ControllerInterface
             if (!$list)
                 return new JsonResponse(['message' => 'No se han encontrado usuarios'], 404);
 
-            $users = array_map(fn(\Api\V1\Model\User $user) => $user->model(), $list);
+            $users = array_map(fn(\Api\V1\Entity\User $user) => $user->model(), $list);
             return new JsonResponse(['message' => 'Listado de usuarios', 'users' => $users], 200);
 
         } catch (\Exception $e) {

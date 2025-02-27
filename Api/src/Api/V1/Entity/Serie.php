@@ -10,13 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Table(name: 'series')]
 class Serie extends Media
 {
-
-    #[ORM\OneToMany(targetEntity: Season::class, mappedBy: "serie", cascade: ["persist", "remove"])]
+    #[ORM\OneToMany(targetEntity: Season::class, mappedBy: "series", cascade: ["persist", "remove"])]
     public Collection $seasons;
 
     public function __construct()
     {
         parent::__construct();
+
         $this->seasons = new ArrayCollection();
     }
 }
